@@ -1,0 +1,8 @@
+name: hic-scaffolding-nf
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - chromap=0.2.3
+  - yahs=1.2a
