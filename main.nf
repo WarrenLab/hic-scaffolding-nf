@@ -58,7 +58,9 @@ process YAHS_SCAFFOLD {
     file("aligned.bam")
 
     output:
-    file("yahs.out*")
+    file("yahs.out.bin"), emit: bin
+    file("yahs.out_scaffolds_final.agp"), emit: agp
+    file("yahs.out_scaffolds_final.fa"), emit: fasta
 
     """
     yahs contigs.fa aligned.bam
@@ -72,32 +74,23 @@ process JUICER_PRE {
     file("contigs.fa.fai")
 
     output:
-    file("out_JBAT*")
+    file("out_JBAT.*")
 
+    // TODO get asm size
     """
     juicer pre -a -o out_JBAT \
         yahs.out.bin \
         yahs.out_scaffolds_final.agp \
         contigs.fa.fai
-    """
-}
 
-process JUICER_TOOLS_PRE {
-    input:
-    file("out_JBAT.txt")
-    file("out_JBAT.hic")
-
-    output:
-    file("out_JBAT.assembly")
-
-    // TODO figure out how to get the juicer command set up
-    // TODO figure out what the deal with the weird echo thing is
-    """
-    $juicerCommand pre out_JBAT.txt out_JBAT.hic <(echo "assembly 1147749140")
+    java -Xmx36G -jar $params.juicerToolsJar \
+        pre out_JBAT.txt out_JBAT.hic <(echo "assembly \${asm_size}")
     """
 }
 
 workflow {
+    // TODO do a parameter check
+
     r1Reads = Channel.fromPath(params.r1Reads)
     r2Reads = Channel.fromPath(params.r2Reads)
     contigs = Channel.fromPath(params.contigs)
@@ -109,9 +102,5 @@ workflow {
 
     YAHS_SCAFFOLD(contigs, SAMTOOLS_FAIDX.out, CHROMAP_ALIGN.out)
 
-    // YAHS_SCAFFOLD generates multiple output files and puts them all in the
-    // same channel, so this is not going to work TODO
-    JUICER_PRE(YAHS_SCAFFOLD.out, SAMTOOLS_FAIDX.out)
-    // TODO same issue, but for JUICER_PRE output
-    JUICER_TOOLS_PRE(JUICER_PRE.out)
+    JUICER_PRE(YAHS_SCAFFOLD.out.bin, YAHS_SCAFFOLD.out.agp, SAMTOOLS_FAIDX.out)
 }
