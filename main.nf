@@ -3,10 +3,10 @@ nextflow.enable.dsl = 2
 
 process SAMTOOLS_FAIDX {
     input:
-    file(contigsFasta)
+    path(contigsFasta)
 
     output:
-    file("${contigsFasta}.fai")
+    path("${contigsFasta}.fai")
 
     """
     samtools index $contigsFasta
@@ -15,10 +15,10 @@ process SAMTOOLS_FAIDX {
 
 process CHROMAP_INDEX {
     input:
-    file(contigsFasta)
+    path(contigsFasta)
 
     output:
-    file("contigs.index")
+    path("contigs.index")
 
     """
     chromap -i -r $contigsFasta -o contigs.index
@@ -27,13 +27,13 @@ process CHROMAP_INDEX {
 
 process CHROMAP_ALIGN {
     input:
-    file(referenceFasta)
-    file(referenceChromapIndex)
-    file(r1Reads)
-    file(r2Reads)
+    path(referenceFasta)
+    path(referenceChromapIndex)
+    path(r1Reads)
+    path(r2Reads)
 
     output:
-    file("aligned.bam")
+    path("aligned.bam")
 
     """
     chromap \
@@ -53,14 +53,14 @@ process CHROMAP_ALIGN {
 
 process YAHS_SCAFFOLD {
     input:
-    file("contigs.fa")
-    file("contigs.fa.fai")
-    file("aligned.bam")
+    path("contigs.fa")
+    path("contigs.fa.fai")
+    path("aligned.bam")
 
     output:
-    file("yahs.out.bin"), emit: bin
-    file("yahs.out_scaffolds_final.agp"), emit: agp
-    file("yahs.out_scaffolds_final.fa"), emit: fasta
+    path("yahs.out.bin"), emit: bin
+    path("yahs.out_scaffolds_final.agp"), emit: agp
+    path("yahs.out_scaffolds_final.fa"), emit: fasta
 
     """
     yahs contigs.fa aligned.bam
@@ -69,12 +69,12 @@ process YAHS_SCAFFOLD {
 
 process JUICER_PRE {
     input:
-    file("yahs.out.bin")
-    file("yahs.out_scaffolds_final.agp")
-    file("contigs.fa.fai")
+    path("yahs.out.bin")
+    path("yahs.out_scaffolds_final.agp")
+    path("contigs.fa.fai")
 
     output:
-    file("out_JBAT.*")
+    path("out_JBAT.*")
 
     // TODO get asm size
     """
