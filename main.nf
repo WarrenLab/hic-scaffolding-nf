@@ -27,8 +27,8 @@ process CHROMAP_INDEX {
 
 process CHROMAP_ALIGN {
     input:
-    path(referenceFasta)
-    path(referenceChromapIndex)
+    path(contigsFasta)
+    path(contigsChromapIndex)
     path(r1Reads)
     path(r2Reads)
 
