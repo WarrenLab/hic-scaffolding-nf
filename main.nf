@@ -9,7 +9,7 @@ process SAMTOOLS_FAIDX {
     path("${contigsFasta}.fai")
 
     """
-    samtools index $contigsFasta
+    samtools faidx $contigsFasta
     """
 }
 
