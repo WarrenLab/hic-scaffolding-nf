@@ -5,4 +5,4 @@ channels:
   - conda-forge
 dependencies:
   - chromap=0.2.3
-  - yahs=1.2a
+  - yahs=1.2a.2
