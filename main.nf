@@ -9,7 +9,7 @@ process PRINT_VERSIONS {
     echo "Chromap: \$(chromap --version)" > versions.txt
     echo "YAHS: \$(yahs --version)" >> versions.txt
     java -jar $params.juicerToolsJar -V | grep Version >> versions.txt
-    echo "assembly-stats: \$(assembly-stats -v) >> versions.txt
+    echo "assembly-stats: \$(assembly-stats -v)" >> versions.txt
     """
 }
 
