@@ -1,6 +1,17 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl = 2
 
+process PRINT_VERSIONS {
+    output:
+    path("versions.txt")
+
+    """
+    echo "Chromap: \$(chromap --version)" > versions.txt
+    echo "YAHS: \$(yahs --version)" >> versions.txt
+    java -jar $params.juicerToolsJar -V | grep Version >> versions.txt
+    """
+}
+
 process SAMTOOLS_FAIDX {
     input:
     path(contigsFasta)
@@ -90,6 +101,7 @@ process JUICER_PRE {
 
 workflow {
     // TODO do a parameter check
+    PRINT_VERSIONS()
 
     r1Reads = Channel.fromPath(params.r1Reads)
     r2Reads = Channel.fromPath(params.r2Reads)
