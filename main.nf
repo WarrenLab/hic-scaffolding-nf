@@ -9,6 +9,7 @@ process PRINT_VERSIONS {
     echo "Chromap: \$(chromap --version)" > versions.txt
     echo "YAHS: \$(yahs --version)" >> versions.txt
     java -jar $params.juicerToolsJar -V | grep Version >> versions.txt
+    echo "assembly-stats: \$(assembly-stats -v) >> versions.txt
     """
 }
 
@@ -99,6 +100,18 @@ process JUICER_PRE {
     """
 }
 
+process ASSEMBLY_STATS {
+    input:
+    path("yahs.out_scaffolds_final.fa")
+
+    output:
+    path("assembly_stats.txt")
+
+    """
+    assembly-stats yahs.out_scaffolds_final.fa > assembly_stats.txt
+    """
+}
+
 workflow {
     // TODO do a parameter check
     PRINT_VERSIONS()
@@ -115,4 +128,6 @@ workflow {
     YAHS_SCAFFOLD(contigs, SAMTOOLS_FAIDX.out, CHROMAP_ALIGN.out)
 
     JUICER_PRE(YAHS_SCAFFOLD.out.bin, YAHS_SCAFFOLD.out.agp, SAMTOOLS_FAIDX.out)
+
+    ASSEMBLY_STATS(YAHS_SCAFFOLD.out.fasta)
 }
