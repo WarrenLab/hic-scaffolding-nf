@@ -76,13 +76,13 @@ process JUICER_PRE {
     output:
     path("out_JBAT.*")
 
-    // TODO get asm size
     """
     juicer pre -a -o out_JBAT \
         yahs.out.bin \
         yahs.out_scaffolds_final.agp \
         contigs.fa.fai
 
+    asm_size=$(awk '{s+=$2} END{print s}' contigs.fa.fai)
     java -Xmx36G -jar $params.juicerToolsJar \
         pre out_JBAT.txt out_JBAT.hic <(echo "assembly \${asm_size}")
     """
