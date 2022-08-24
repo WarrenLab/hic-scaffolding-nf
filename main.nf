@@ -6,7 +6,7 @@ process PRINT_VERSIONS {
     path("versions.txt")
 
     """
-    echo "Chromap: \$(chromap --version)" > versions.txt
+    echo "Chromap: \$(chromap --version)" 2> versions.txt
     echo "YAHS: \$(yahs --version)" >> versions.txt
     java -jar $params.juicerToolsJar -V | grep Version >> versions.txt
     echo "assembly-stats: \$(assembly-stats -v)" >> versions.txt
