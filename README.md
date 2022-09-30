@@ -41,7 +41,7 @@ in the directory from which you're running it (see nextflow documentation).
 
 ## Running
 ```bash
-nextflow run WarrenLab/hic-scaffolding-pipeline \
+nextflow run WarrenLab/hic-scaffolding-nf \
     --contigs contigs.fa \
     --r1Reads hic_reads_R1.fastq.gz \
     --r2Reads hic_reads_R2.fastq.gz
