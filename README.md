@@ -10,7 +10,7 @@ It then performs the following tasks:
 1. Aligns the Hi-C reads to the contigs using [chromap][chromap]
 2. Scaffolds the contigs using [yahs][yahs]
 3. Prepares all the files you need to do manual curation in
-   [Juicebox][JuicerTools]
+   [Juicebox][juicer_tools]
 
 and produces the following outputs:
 * Alignments in bam format (`out/chromap/aligned.bam`)
