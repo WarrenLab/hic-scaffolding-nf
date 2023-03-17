@@ -4,6 +4,8 @@ channels:
   - bioconda
   - conda-forge
 dependencies:
-  - chromap=0.2.3
-  - yahs=1.2a.2
-  - assembly-stats=1.0.1
+  - chromap
+  - yahs
+  - assembly-stats
+  - samtools
+  - openjdk
