@@ -52,4 +52,4 @@ section above).
 [nextflow]: https://www.nextflow.io/
 [chromap]: https://github.com/haowenz/chromap
 [yahs]: https://github.com/c-zhou/yahs
-[juicer_tools]: https://github.com/aidenlab/JuicerTools
+[juicer_tools]: https://github.com/aidenlab/juicer/wiki/Download
