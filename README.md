@@ -49,6 +49,11 @@ nextflow run WarrenLab/hic-scaffolding-nf \
 You'll need to add a couple options depending on your configuration (see
 section above).
 
+If you want to specify an enzyme to YAHS, you can add, e.g.,
+```
+--extra-yahs-args "-e GATC"
+```
+
 [nextflow]: https://www.nextflow.io/
 [chromap]: https://github.com/haowenz/chromap
 [yahs]: https://github.com/c-zhou/yahs

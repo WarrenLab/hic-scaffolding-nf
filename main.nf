@@ -1,6 +1,8 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl = 2
 
+params.extraYahsArgs = ''
+
 process PRINT_VERSIONS {
     output:
     path("versions.txt")
@@ -75,7 +77,7 @@ process YAHS_SCAFFOLD {
     path("yahs.out_scaffolds_final.fa"), emit: fasta
 
     """
-    yahs contigs.fa aligned.bam
+    yahs $params.extraYahsArgs contigs.fa aligned.bam
     """
 }
 
