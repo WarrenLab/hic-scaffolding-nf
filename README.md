@@ -46,6 +46,12 @@ nextflow run WarrenLab/hic-scaffolding-nf \
     --r1Reads hic_reads_R1.fastq.gz \
     --r2Reads hic_reads_R2.fastq.gz
 ```
+**N.B.** The `WarrenLab/hic-scaffolding-nf` is the name of this github
+repository, not a local path on your machine. You do not need to download
+any file in this repository; just tell nextflow to run
+`WarrenLab/hic-scaffolding-nf` and it will take care of downloading the pipeline
+for you.
+
 You'll need to add a couple options depending on your configuration (see
 section above).
 
