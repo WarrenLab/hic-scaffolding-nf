@@ -35,7 +35,7 @@ This pipeline has the following dependencies:
 Nextflow must be in your path. You can get nextflow to make a conda environment
 containing chromap and yahs for you with `-profile conda` (note one dash!).
 JuicerTools is distributed as a jar file, so you need to tell the pipeline
-where it is by adding the argument `--juicer-tools-jar /path/to/jar` (note two
+where it is by adding the argument `--juicerToolsJar /path/to/jar` (note two
 dashes!). You can also add this stuff to a config file called `nextflow.config`
 in the directory from which you're running it (see nextflow documentation).
 
